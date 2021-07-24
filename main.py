@@ -45,18 +45,22 @@ def check_bet(winner):
         print("You win!!!")
 
 
-for i in range(6):
-    make_turtle()
+def race():
+    for i in range(6):
+        make_turtle()
+    global end
+    while not end:
+        for turtle_num in range(0, len(turtles)):
+            rand = random.randint(10, 20)
+            turtles[turtle_num].set_position(rand, 50 * turtle_num + 50)
+            if turtles[turtle_num].get_distance() >= 500:
+                end = True
+                win = turtles[turtle_num].get_color()[0]
+                print(f"Winner is {win} turtle!\n")
+                check_bet(win)
+                break
 
-while not end:
-    for turtle_num in range(0, len(turtles)):
-        rand = random.randint(10, 20)
-        turtles[turtle_num].set_position(rand, 50 * turtle_num + 50)
-        if turtles[turtle_num].get_distance() >= 500:
-            end = True
-            win = turtles[turtle_num].get_color()[0]
-            print(f"Winner is {win} turtle!\n")
-            check_bet(win)
-            break
+
+race()
 
 sc.exitonclick()
