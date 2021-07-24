@@ -1,13 +1,14 @@
 from turtle import Turtle, Screen
 import random
+
 colors = ["red", "orange", "yellow", "green", "blue", "purple"]
 turtles = []
 sc = Screen()
 sc.setup(width=500, height=400)
-sc.setworldcoordinates(0,0, 500, 400)
-bet = sc.textinput("Make a bet", "Choose color: red, orange, yellow, green, blue, purple.")
-print(bet)
+sc.setworldcoordinates(0, 0, 500, 400)
+bet = sc.textinput("Make a bet", "Choose color: red, orange, yellow, green, blue, purple.").lower()
 end = False
+
 
 class RaceTurtle():
     def __init__(self):
@@ -29,25 +30,33 @@ class RaceTurtle():
     def get_color(self):
         return self.obj.color()
 
+
 def make_turtle():
     turtle_obj = RaceTurtle()
     turtles.append(turtle_obj)
     turtles[i].set_color(colors[i])
-    turtles[i].set_position(0, 50*i+50)
+    turtles[i].set_position(0, 50 * i + 50)
+
+
+def check_bet(winner):
+    if winner != bet:
+        print("You lose the bet")
+    else:
+        print("You win!!!")
 
 
 for i in range(6):
     make_turtle()
 
-
 while not end:
     for turtle_num in range(0, len(turtles)):
         rand = random.randint(10, 20)
-        turtles[turtle_num].set_position(rand, 50*turtle_num+50)
+        turtles[turtle_num].set_position(rand, 50 * turtle_num + 50)
         if turtles[turtle_num].get_distance() >= 500:
             end = True
-            print(f"Winner is {turtles[turtle_num].get_color()[0]} turtle!\n")
+            win = turtles[turtle_num].get_color()[0]
+            print(f"Winner is {win} turtle!\n")
+            check_bet(win)
             break
-
 
 sc.exitonclick()
