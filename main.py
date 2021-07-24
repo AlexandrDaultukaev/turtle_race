@@ -31,7 +31,7 @@ class RaceTurtle():
         return self.obj.color()
 
 
-def make_turtle():
+def make_turtle(i):
     turtle_obj = RaceTurtle()
     turtles.append(turtle_obj)
     turtles[i].set_color(colors[i])
@@ -47,7 +47,7 @@ def check_bet(winner):
 
 def race():
     for i in range(6):
-        make_turtle()
+        make_turtle(i)
     global end
     while not end:
         for turtle_num in range(0, len(turtles)):
